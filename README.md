@@ -20,5 +20,8 @@ There is then another goroutine that reads from that channel, re-orders the resu
 
 Working examples can be found in fast / slow folders of this repo.
 
+### Don't use in production!
+This code optimistically assumes that the rate of the produced messages can be absorbed by the worker. In case a worker is slow (or stuck) the buffer will grow indefinetely (up to the memory the process can allocate) with no output.
+
 ### Notes
 The "reordering" part is really simple and could be optimized a lot, reducing gc by adding a circular buffer and / or sorting the slice.
